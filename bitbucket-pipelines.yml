@@ -5,6 +5,7 @@ pipelines:
         script:
           - apt-get update && apt-get install -y zip
           - zip code.zip lambda_function.py
+          - pip3 install -r requirements.txt
         artifacts:
           - code.zip
     - step:
