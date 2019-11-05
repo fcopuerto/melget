@@ -16,5 +16,5 @@ pipelines:
               AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
               AWS_DEFAULT_REGION: 'us-east-1'
               FUNCTION_NAME: 'melget_auto'
-              COMMAND: 'update'
+              COMMAND: 'create'
               ZIP_FILE: 'code.zip'
