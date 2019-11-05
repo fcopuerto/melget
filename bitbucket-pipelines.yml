@@ -5,8 +5,11 @@ pipelines:
         script:
           - apt-get update && apt-get install -y zip
           - apt-get install -y python3-pip 
-          - zip code.zip lambda_function.py
-          - pip3 install -r requirements.txt
+          - pip3 install -r requirements.txt --target ./package
+          - cd package
+          - zip -r9 ${OLDPWD}/melget.zip .
+          - cd $OLDPWD
+          - zip code.zip *.py
         artifacts:
           - code.zip
     - step:
