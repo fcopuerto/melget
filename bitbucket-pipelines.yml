@@ -1,0 +1,20 @@
+pipelines:
+  default:
+    - step:
+        name: Build and package
+        script:
+          - apt-get update && apt-get install -y zip
+          - zip code.zip lambda_function.py
+        artifacts:
+          - code.zip
+    - step:
+        name: Update Lambda code
+        script:
+          - pipe: atlassian/aws-lambda-deploy:0.2.1
+            variables:
+              AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+              AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+              AWS_DEFAULT_REGION: 'us-east-1'
+              FUNCTION_NAME: 'deployedmelget'
+              COMMAND: 'update'
+              ZIP_FILE: 'code.zip'
