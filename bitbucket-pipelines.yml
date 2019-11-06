@@ -7,9 +7,9 @@ pipelines:
           - apt-get install -y python3-pip 
           - pip3 install -r requirements.txt --target ./package
           - cd package
-          - zip -r9 ${OLDPWD}/melget.zip .
+          - zip -r9 ${OLDPWD}/code.zip .
           - cd $OLDPWD
-          - zip code.zip *.py
+          - zip -g code.zip *.py
         artifacts:
           - code.zip
     - step:
