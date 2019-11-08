@@ -25,8 +25,8 @@ pipelines:
                 LOCAL_PATH: "./"    
             - pipe: atlassian/aws-cloudformation-deploy:0.6.3
               variables:
-                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
                 AWS_DEFAULT_REGION: 'us-east-1'
                 STACK_NAME: "DeployMelcloud"
                 TEMPLATE: "https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/Melget.zip"
