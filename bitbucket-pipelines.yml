@@ -1,6 +1,19 @@
 pipelines:
   default:
     - step:
+        name: Deploy lambda
+        script:
+          - apt-get update && apt-get install -y zip
+          - apt-get install -y python3-pip 
+          - pip3 install -r requirements.txt --target ./package
+          - cd package
+          - zip -r9 ${OLDPWD}/Melget.zip .
+          - cd $OLDPWD
+          - zip -g Melget.zip *.py
+          - aws --region us-east-1 s3 cp Melget.zip s3://fcopuerto-deploy-cloudformation/lambdas/Melget.zip
+        artifacts:
+          - Melget.zip
+    - step:
         name: Build and package
         script:
           - apt-get update && apt-get install -y zip
