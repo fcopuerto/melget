@@ -29,7 +29,7 @@ pipelines:
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: 'us-east-1'
                 STACK_NAME: "DeployMelcloud"
-                TEMPLATE: "https://s3.amazonaws.com/cfn-deploy-pipe/cfn-template.json"
+                TEMPLATE: "https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/Melget.zip"
     - step:
           name: Update Lambda code
           script:
