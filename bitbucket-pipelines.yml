@@ -14,7 +14,7 @@ pipelines:
           - Melget.zip
     - step:
           name: Deploy
-          deployment: fcopuerto
+          deployment: development
           script:
             - pipe: atlassian/aws-s3-deploy:0.2.1
               variables:
