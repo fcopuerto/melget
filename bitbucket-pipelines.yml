@@ -1,7 +1,7 @@
 pipelines:
   default:
     - step:
-        name: Deploy lambda
+        name: Build and package
         script:
           - apt-get update && apt-get install -y zip
           - apt-get install -y python3-pip 
@@ -10,29 +10,27 @@ pipelines:
           - zip -r9 ${OLDPWD}/Melget.zip .
           - cd $OLDPWD
           - zip -g Melget.zip *.py
-          - aws --region us-east-1 s3 cp Melget.zip s3://fcopuerto-deploy-cloudformation/lambdas/Melget.zip
         artifacts:
           - Melget.zip
     - step:
-        name: Build and package
-        script:
-          - apt-get update && apt-get install -y zip
-          - apt-get install -y python3-pip 
-          - pip3 install -r requirements.txt --target ./package
-          - cd package
-          - zip -r9 ${OLDPWD}/code.zip .
-          - cd $OLDPWD
-          - zip -g code.zip *.py
-        artifacts:
-          - code.zip
+          name: Deploy
+          deployment: fcopuerto
+          script:
+            - pipe: atlassian/aws-s3-deploy:0.2.1
+              variables:
+                AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+                AWS_DEFAULT_REGION: "us-east-1"
+                S3_BUCKET: "fcopuerto-deploy-cloudformation"
+                LOCAL_PATH: "Melget.zip"    
     - step:
-        name: Update Lambda code
-        script:
-          - pipe: atlassian/aws-lambda-deploy:0.2.1
-            variables:
-              AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-              AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-              AWS_DEFAULT_REGION: 'us-east-1'
-              FUNCTION_NAME: 'MELGet'
-              COMMAND: 'update'
-              ZIP_FILE: 'code.zip'
+          name: Update Lambda code
+          script:
+            - pipe: atlassian/aws-lambda-deploy:0.2.1
+              variables:
+                AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+                AWS_DEFAULT_REGION: 'us-east-1'
+                FUNCTION_NAME: 'MELGet'
+                COMMAND: 'update'
+                ZIP_FILE: 'Melget.zip'
