@@ -21,7 +21,7 @@ pipelines:
             name: Deploy
             deployment: Test
             script:
-              - echo 'This script runs only on deploy of '$BITBUCKET_TAG'"
+              - echo 'This script runs only on deploy of "$BITBUCKET_TAG"'
               - pipe: atlassian/aws-s3-deploy:0.2.1
                 variables:
                   AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
