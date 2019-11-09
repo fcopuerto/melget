@@ -54,8 +54,8 @@ Resources:
       Description: "This lambda is for comunicating with the Mitshubishi TM Melcloud API"
       Environment:
           Variables:
-              MELCLOUD_USER: AQICAHjqjS+M3eHB+YXYFwA4ub0Cn0PnDnhi2Nj08EHlVXsjyAHZhthU//WX5NWX6AtxQXT9AAAAazBpBgkqhkiG9w0BBwagXDBaAgEAMFUGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMwSQ722HQTkqSeeG3AgEQgCiNy+znNlLyyY7ZT6uy3BbgHII7wbCtqIIRmgaSO9PDW3y9vA3w89EP
-              MELCLOUD_PASS: AQICAHjqjS+M3eHB+YXYFwA4ub0Cn0PnDnhi2Nj08EHlVXsjyAHAuqIV8zBhPstfad1dmRoYAAAAcTBvBgkqhkiG9w0BBwagYjBgAgEAMFsGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMK48XuXv0eiQSUH9MAgEQgC5LX+L44Ebc4p0wGEmYUdQ3gBoZ+LFdu8+usCwJFjd63gvxTcKpWdH17pal3E6Y
+              MELCLOUD_PASS: AQICAHjqjS+M3eHB+YXYFwA4ub0Cn0PnDnhi2Nj08EHlVXsjyAHZhthU//WX5NWX6AtxQXT9AAAAazBpBgkqhkiG9w0BBwagXDBaAgEAMFUGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMwSQ722HQTkqSeeG3AgEQgCiNy+znNlLyyY7ZT6uy3BbgHII7wbCtqIIRmgaSO9PDW3y9vA3w89EP
+              MELCLOUD_USER: AQICAHjqjS+M3eHB+YXYFwA4ub0Cn0PnDnhi2Nj08EHlVXsjyAHAuqIV8zBhPstfad1dmRoYAAAAcTBvBgkqhkiG9w0BBwagYjBgAgEAMFsGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMK48XuXv0eiQSUH9MAgEQgC5LX+L44Ebc4p0wGEmYUdQ3gBoZ+LFdu8+usCwJFjd63gvxTcKpWdH17pal3E6Y
       KmsKeyArn : "arn:aws:kms:us-east-1:686550853585:key/29f9fdff-4cc0-4fd0-a5a0-99081281484f"    
       Handler: "lambda_function.lambda_handler"
       Role: !GetAtt 
