@@ -44,3 +44,4 @@ pipelines:
                 FUNCTION_NAME: 'MELGet'
                 COMMAND: 'update'
                 ZIP_FILE: 'Melget.zip'
+                
