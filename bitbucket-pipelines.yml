@@ -40,7 +40,6 @@ pipelines:
                     - "CAPABILITY_IAM"
                     - "CAPABILITY_NAMED_IAM"  
   branches:
-    default:
     master:
       - step:
             name: Deploy
