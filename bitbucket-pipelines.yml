@@ -29,7 +29,7 @@ pipelines:
             name: Deploy
             deployment: Test
             script:
-              - echo "This script runs only on deploys $BITBUCKET_TAG"
+              - echo 'This script runs only on deploys $BITBUCKET_TAG'
               - pipe: atlassian/aws-s3-deploy:0.2.1
                 variables:
                   AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
@@ -63,7 +63,7 @@ pipelines:
       - step:
             name: Update Lambda code by Branch
             script:
-              - echo "This script runs only on commits of the branch $BITBUCKET_BRANCH
+              - echo 'This script runs only on commits of the branch $BITBUCKET_BRANCH '
               - pipe: atlassian/aws-lambda-deploy:0.2.1
                 variables:
                   AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
