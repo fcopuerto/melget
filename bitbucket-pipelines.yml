@@ -34,7 +34,7 @@ pipelines:
                   AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
                   AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
                   AWS_DEFAULT_REGION: 'us-east-1'
-                  STACK_NAME: 'MELGet-Deploy-${BITBUCKET_BRANCH}'
+                  STACK_NAME: 'MELGet-Deploy-$BITBUCKET_BRANCH'
                   TEMPLATE: "https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/$BITBUCKET_BRANCH/deploy-$BITBUCKET_BRANCH.yml"
                   CAPABILITIES: 
                     - "CAPABILITY_IAM"
