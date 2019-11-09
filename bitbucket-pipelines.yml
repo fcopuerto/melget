@@ -1,61 +1,62 @@
 pipelines:
-  master:
-    - step:
-        name: Build and package
-        script:
-          - apt-get update && apt-get install -y zip
-          - apt-get install -y python3-pip 
-          - pip3 install -r requirements.txt --target ./package
-          - cd package
-          - zip -r9 ${OLDPWD}/Melget.zip .
-          - cd $OLDPWD
-          - zip -g Melget.zip *.py
-        artifacts:
-          - Melget.zip
-    - step:
-        - step:
-          name: Deploy
-          deployment: Test
+  branches:
+    master:
+      - step:
+          name: Build and package
           script:
-            - pipe: atlassian/aws-s3-deploy:0.2.1
-              variables:
-                AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-                AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-                AWS_DEFAULT_REGION: "us-east-1"
-                S3_BUCKET: "fcopuerto-deploy-cloudformation/lambdas"
-                LOCAL_PATH: "./"    
-            - pipe: atlassian/aws-cloudformation-deploy:0.6.3
-              variables:
-                AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-                AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-                AWS_DEFAULT_REGION: 'us-east-1'
-                STACK_NAME: "MELGet-Deploy"
-                TEMPLATE: "https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/deploy.yml"
-                CAPABILITIES: 
-                  - "CAPABILITY_IAM"
-                  - "CAPABILITY_NAMED_IAM"
-  devel:
-    - step:
-        name: Build and package
-        script:
-          - apt-get update && apt-get install -y zip
-          - apt-get install -y python3-pip 
-          - pip3 install -r requirements.txt --target ./package
-          - cd package
-          - zip -r9 ${OLDPWD}/Melget.zip .
-          - cd $OLDPWD
-          - zip -g Melget.zip *.py
-        artifacts:
-          - Melget.zip
-    - step:
-          name: Update Lambda code
+            - apt-get update && apt-get install -y zip
+            - apt-get install -y python3-pip 
+            - pip3 install -r requirements.txt --target ./package
+            - cd package
+            - zip -r9 ${OLDPWD}/Melget.zip .
+            - cd $OLDPWD
+            - zip -g Melget.zip *.py
+          artifacts:
+            - Melget.zip
+      - step:
+          - step:
+            name: Deploy
+            deployment: Test
+            script:
+              - pipe: atlassian/aws-s3-deploy:0.2.1
+                variables:
+                  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+                  AWS_DEFAULT_REGION: "us-east-1"
+                  S3_BUCKET: "fcopuerto-deploy-cloudformation/lambdas"
+                  LOCAL_PATH: "./"    
+              - pipe: atlassian/aws-cloudformation-deploy:0.6.3
+                variables:
+                  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+                  AWS_DEFAULT_REGION: 'us-east-1'
+                  STACK_NAME: "MELGet-Deploy"
+                  TEMPLATE: "https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/deploy.yml"
+                  CAPABILITIES: 
+                    - "CAPABILITY_IAM"
+                    - "CAPABILITY_NAMED_IAM"
+    devel:
+      - step:
+          name: Build and package
           script:
-            - pipe: atlassian/aws-lambda-deploy:0.2.1
-              variables:
-                AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-                AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-                AWS_DEFAULT_REGION: 'us-east-1'
-                FUNCTION_NAME: 'MELGet'
-                COMMAND: 'update'
-                ZIP_FILE: 'Melget.zip'
+            - apt-get update && apt-get install -y zip
+            - apt-get install -y python3-pip 
+            - pip3 install -r requirements.txt --target ./package
+            - cd package
+            - zip -r9 ${OLDPWD}/Melget.zip .
+            - cd $OLDPWD
+            - zip -g Melget.zip *.py
+          artifacts:
+            - Melget.zip
+      - step:
+            name: Update Lambda code
+            script:
+              - pipe: atlassian/aws-lambda-deploy:0.2.1
+                variables:
+                  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+                  AWS_DEFAULT_REGION: 'us-east-1'
+                  FUNCTION_NAME: 'MELGet'
+                  COMMAND: 'update'
+                  ZIP_FILE: 'Melget.zip'
                 
