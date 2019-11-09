@@ -8,6 +8,7 @@ pipelines:
         - step:
             name: Build and package
             script:
+              - echo "This step Build and package runs only on deploy of $BITBUCKET_TAG and branch devel"
               - apt-get update && apt-get install -y zip
               - apt-get install -y python3-pip 
               - pip3 install -r requirements.txt --target ./package
@@ -21,7 +22,7 @@ pipelines:
             name: Deploy
             deployment: Test
             script:
-              - echo "This script runs only on deploy of $BITBUCKET_TAG and branch devel"
+              - echo "This step Deploy runs only on deploy of $BITBUCKET_TAG and branch devel"
               - pipe: atlassian/aws-s3-deploy:0.2.1
                 variables:
                   AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
