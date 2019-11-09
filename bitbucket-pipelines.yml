@@ -22,29 +22,53 @@ pipelines:
                 variables:
                   AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
                   AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-                  AWS_DEFAULT_REGION: "us-east-1"
-                  S3_BUCKET: "fcopuerto-deploy-cloudformation/lambdas/production"
+                  AWS_DEFAULT_REGION: 'us-east-1'
+                  S3_BUCKET: 'fcopuerto-deploy-cloudformation/lambdas/production'
                   LOCAL_PATH: "./"    
               - pipe: atlassian/aws-cloudformation-deploy:0.6.3
                 variables:
                   AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
                   AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
                   AWS_DEFAULT_REGION: 'us-east-1'
-                  STACK_NAME: "MELGet-Deploy"
-                  TEMPLATE: "https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/deploy.yml"
+                  STACK_NAME: 'MELGet-Deploy'
+                  TEMPLATE: 'https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/production/deploy.yml'
                   CAPABILITIES: 
                     - "CAPABILITY_IAM"
                     - "CAPABILITY_NAMED_IAM"
+    tags:
+      deploy-*:
+        - step:
+            name: Deploy
+            deployment: Test
+            script:
+              - echo "This script runs only on deploys $BITBUCKET_TAG"
+              - pipe: atlassian/aws-s3-deploy:0.2.1
+                variables:
+                  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+                  AWS_DEFAULT_REGION: 'us-east-1'
+                  S3_BUCKET: 'fcopuerto-deploy-cloudformation/lambdas/production'
+                  LOCAL_PATH: "./"    
+              - pipe: atlassian/aws-cloudformation-deploy:0.6.3
+                variables:
+                  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+                  AWS_DEFAULT_REGION: 'us-east-1'
+                  STACK_NAME: 'MELGet-Deploy-$BITBUCKET_BRANCH'
+                  TEMPLATE: 'https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/$BITBUCKET_BRANCH/deploy.yml'
+                  CAPABILITIES: 
+                    - "CAPABILITY_IAM"
+                    - "CAPABILITY_NAMED_IAM"      
     devel:
       - step:
-            name: Update Lambda code
+            name: Update Lambda code by Branch
             script:
               - pipe: atlassian/aws-lambda-deploy:0.2.1
                 variables:
                   AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
                   AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
                   AWS_DEFAULT_REGION: 'us-east-1'
-                  FUNCTION_NAME: 'MELGet'
+                  FUNCTION_NAME: 'MELGet$BITBUCKET_BRANCH'
                   COMMAND: 'update'
                   ZIP_FILE: 'Melget.zip'
                 
