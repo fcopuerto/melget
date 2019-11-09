@@ -72,7 +72,7 @@ pipelines:
                   AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
                   AWS_DEFAULT_REGION: 'us-east-1'
                   STACK_NAME: 'MELGet-Deploy-production'
-                  TEMPLATE: "https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/devel/deploy-production.yml"
+                  TEMPLATE: "https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/production/deploy-production.yml"
                   CAPABILITIES: 
                     - "CAPABILITY_IAM"
                     - "CAPABILITY_NAMED_IAM"    
