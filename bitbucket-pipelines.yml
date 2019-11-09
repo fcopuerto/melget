@@ -59,7 +59,7 @@ pipelines:
                   CAPABILITIES: 
                     - "CAPABILITY_IAM"
                     - "CAPABILITY_NAMED_IAM"      
-    devel_culo:
+    devel_culos:
       - step:
             name: Build and package
             script:
