@@ -51,7 +51,7 @@ Resources:
     Type: "AWS::Lambda::Function"
     Properties: 
       FunctionName: "MelgetProd"
-      Description: "This lambda is for comunicating with the Mitshubishi Melcloud API"
+      Description: "This lambda is for comunicating with the Mitshubishi TM Melcloud API"
       Environment:
           Variables:
               MELCLOUD_USER: AQICAHjqjS+M3eHB+YXYFwA4ub0Cn0PnDnhi2Nj08EHlVXsjyAHZhthU//WX5NWX6AtxQXT9AAAAazBpBgkqhkiG9w0BBwagXDBaAgEAMFUGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMwSQ722HQTkqSeeG3AgEQgCiNy+znNlLyyY7ZT6uy3BbgHII7wbCtqIIRmgaSO9PDW3y9vA3w89EP
@@ -68,4 +68,3 @@ Resources:
       Timeout: 25
       TracingConfig:
         Mode: "Active"
-  
