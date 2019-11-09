@@ -27,7 +27,7 @@ pipelines:
                   AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
                   AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
                   AWS_DEFAULT_REGION: 'us-east-1'
-                  S3_BUCKET: "fcopuerto-deploy-cloudformation/lambdas/$BITBUCKET_BRANCH/
+                  S3_BUCKET: "fcopuerto-deploy-cloudformation/lambdas/$BITBUCKET_BRANCH/"
                   LOCAL_PATH: './'    
               - pipe: atlassian/aws-cloudformation-deploy:0.6.3
                 variables:
