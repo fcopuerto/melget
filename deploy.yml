@@ -50,6 +50,7 @@ Resources:
   MELGet222: 
     Type: "AWS::Lambda::Function"
     Properties: 
+      Function-name: "MelgetProd"
       Description: "This lambda is for comunicating with the Mitshubishi Melcloud API"
       Environment:
           Variables:
