@@ -4,7 +4,7 @@ pipelines:
         script:
           - echo "Hi"
   tags:
-      deploy-devel*:
+      deploydevel*:
         - step:
             name: Build and package
             script:
