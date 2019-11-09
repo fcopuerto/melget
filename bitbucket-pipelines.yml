@@ -4,7 +4,7 @@ pipelines:
         script:
           - echo "Hi"
   tags:
-      deploy*:
+      deploy_devel*:
         - step:
             name: Build and package
             script:
@@ -21,21 +21,21 @@ pipelines:
             name: Deploy
             deployment: Test
             script:
-              - echo "This script runs only on deploy of $BITBUCKET_TAG and branch $BITBUCKET_BRANCH"
+              - echo "This script runs only on deploy of $BITBUCKET_TAG and branch devel"
               - pipe: atlassian/aws-s3-deploy:0.2.1
                 variables:
                   AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
                   AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
                   AWS_DEFAULT_REGION: 'us-east-1'
-                  S3_BUCKET: "fcopuerto-deploy-cloudformation/lambdas/$BITBUCKET_BRANCH/"
+                  S3_BUCKET: "fcopuerto-deploy-cloudformation/lambdas/devel/"
                   LOCAL_PATH: './'    
               - pipe: atlassian/aws-cloudformation-deploy:0.6.3
                 variables:
                   AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
                   AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
                   AWS_DEFAULT_REGION: 'us-east-1'
-                  STACK_NAME: 'MELGet-Deploy-$BITBUCKET_BRANCH'
-                  TEMPLATE: "https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/$BITBUCKET_BRANCH/deploy-$BITBUCKET_BRANCH.yml"
+                  STACK_NAME: 'MELGet-Deploy-devel'
+                  TEMPLATE: "https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/devel/deploy-devel.yml"
                   CAPABILITIES: 
                     - "CAPABILITY_IAM"
                     - "CAPABILITY_NAMED_IAM"  
