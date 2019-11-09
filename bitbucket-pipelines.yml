@@ -1,4 +1,8 @@
 pipelines:
+  default:
+    - step:
+        script:
+          - echo "Hi"
   tags:
       deploy*:
         - step:
