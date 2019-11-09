@@ -1,0 +1,70 @@
+Resources:
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName: root
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - s3:GetObject
+            - s3:PutObject
+            Resource: arn:aws:s3:::*
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:*
+            Resource: arn:aws:logs:*:*:*
+          Statement:
+          - Effect: Allow
+            Action: iam:ListUsers
+            Resource: arn:aws:iam::*:*
+          Statement:
+          - Effect: Allow
+            Action:
+            - xray:PutTraceSegments
+            - xray:PutTelemetryRecords
+            - xray:GetSamplingRules
+            - xray:GetSamplingTargets
+            - xray:GetSamplingStatisticSummaries
+            Resource: "*"
+      Path: /
+      RoleName: !Join 
+        - '-'
+        - - melget
+          - dev
+          - us-east-1
+          - lambdaRole
+  MELGet222: 
+    Type: "AWS::Lambda::Function"
+    Properties: 
+      FunctionName: "ME"
+      Description: "This lambda is for comunicating with the Mitshubishi TM Melcloud API"
+      Environment:
+          Variables:
+              MELCLOUD_PASS: AQICAHjqjS+M3eHB+YXYFwA4ub0Cn0PnDnhi2Nj08EHlVXsjyAHZhthU//WX5NWX6AtxQXT9AAAAazBpBgkqhkiG9w0BBwagXDBaAgEAMFUGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMwSQ722HQTkqSeeG3AgEQgCiNy+znNlLyyY7ZT6uy3BbgHII7wbCtqIIRmgaSO9PDW3y9vA3w89EP
+              MELCLOUD_USER: AQICAHjqjS+M3eHB+YXYFwA4ub0Cn0PnDnhi2Nj08EHlVXsjyAHAuqIV8zBhPstfad1dmRoYAAAAcTBvBgkqhkiG9w0BBwagYjBgAgEAMFsGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMK48XuXv0eiQSUH9MAgEQgC5LX+L44Ebc4p0wGEmYUdQ3gBoZ+LFdu8+usCwJFjd63gvxTcKpWdH17pal3E6Y
+      KmsKeyArn : "arn:aws:kms:us-east-1:686550853585:key/29f9fdff-4cc0-4fd0-a5a0-99081281484f"    
+      Handler: "lambda_function.lambda_handler"
+      Role: !GetAtt 
+          - LambdaExecutionRole
+          - Arn
+      Code: 
+        S3Bucket: "fcopuerto-deploy-cloudformation"
+        S3Key: "lambdas/devel/Melget.zip"
+      Runtime: "python3.7"
+      Timeout: 25
+      TracingConfig:
+        Mode: "Active"
