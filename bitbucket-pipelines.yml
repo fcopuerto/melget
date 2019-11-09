@@ -1,29 +1,5 @@
 pipelines:
-  branches:
-    default:
-    master:
-      - step:
-            name: Deploy
-            deployment: Test
-            script:
-              - pipe: atlassian/aws-s3-deploy:0.2.1
-                variables:
-                  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-                  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-                  AWS_DEFAULT_REGION: 'us-east-1'
-                  S3_BUCKET: 'fcopuerto-deploy-cloudformation/lambdas/production'
-                  LOCAL_PATH: "./"    
-              - pipe: atlassian/aws-cloudformation-deploy:0.6.3
-                variables:
-                  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-                  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-                  AWS_DEFAULT_REGION: 'us-east-1'
-                  STACK_NAME: 'MELGet-Deploy'
-                  TEMPLATE: 'https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/production/deploy.yml'
-                  CAPABILITIES: 
-                    - "CAPABILITY_IAM"
-                    - "CAPABILITY_NAMED_IAM"
-    tags:
+  tags:
       deploy-*:
         - step:
             name: Build and package
@@ -58,7 +34,31 @@ pipelines:
                   TEMPLATE: 'https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/$BITBUCKET_BRANCH/deploy_$BITBUCKET_BRANCH.yml'
                   CAPABILITIES: 
                     - "CAPABILITY_IAM"
-                    - "CAPABILITY_NAMED_IAM"      
+                    - "CAPABILITY_NAMED_IAM"  
+  branches:
+    default:
+    master:
+      - step:
+            name: Deploy
+            deployment: Test
+            script:
+              - pipe: atlassian/aws-s3-deploy:0.2.1
+                variables:
+                  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+                  AWS_DEFAULT_REGION: 'us-east-1'
+                  S3_BUCKET: 'fcopuerto-deploy-cloudformation/lambdas/production'
+                  LOCAL_PATH: "./"    
+              - pipe: atlassian/aws-cloudformation-deploy:0.6.3
+                variables:
+                  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+                  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+                  AWS_DEFAULT_REGION: 'us-east-1'
+                  STACK_NAME: 'MELGet-Deploy'
+                  TEMPLATE: 'https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/production/deploy.yml'
+                  CAPABILITIES: 
+                    - "CAPABILITY_IAM"
+                    - "CAPABILITY_NAMED_IAM"    
     devel_culoss:
       - step:
             name: Build and package
