@@ -28,8 +28,8 @@ pipelines:
                 AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
                 AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
                 AWS_DEFAULT_REGION: 'us-east-1'
-                STACK_NAME: "DeployMelcloud"
-                TEMPLATE: "https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/Melget.zip"
+                STACK_NAME: "MELGet-Deploy"
+                TEMPLATE: "https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/deploy.yml"
     - step:
           name: Update Lambda code
           script:
