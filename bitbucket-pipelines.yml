@@ -1,6 +1,6 @@
 pipelines:
   tags:
-      deploy-*:
+      deploy*:
         - step:
             name: Build and package
             script:
