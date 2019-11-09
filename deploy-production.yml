@@ -44,7 +44,7 @@ Resources:
       RoleName: !Join 
         - '-'
         - - melget
-          - dev
+          - prod
           - us-east-1
           - lambdaRole
   MELGet222: 
