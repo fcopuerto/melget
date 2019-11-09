@@ -30,8 +30,9 @@ pipelines:
                 AWS_DEFAULT_REGION: 'us-east-1'
                 STACK_NAME: "MELGet-Deploy"
                 TEMPLATE: "https://fcopuerto-deploy-cloudformation.s3.amazonaws.com/lambdas/deploy.yml"
-                CAPABILITIES: - "CAPABILITY_IAM"
-                              - "CAPABILITY_NAMED_IAM"
+                CAPABILITIES: 
+                  - "CAPABILITY_IAM"
+                  - "CAPABILITY_NAMED_IAM"
     - step:
           name: Update Lambda code
           script:
