@@ -68,3 +68,4 @@ Resources:
       Timeout: 25
       TracingConfig:
         Mode: "Active"
+  
