@@ -44,7 +44,7 @@ pipelines:
         - step:
             name: Build and package
             script:
-              - echo "This step Build and package runs only on deploy of $BITBUCKET_TAG and branch devel"
+              - echo "This step Build and package runs only on deploy of $BITBUCKET_TAG and branch master"
               - apt-get update && apt-get install -y zip
               - apt-get install -y python3-pip 
               - pip3 install -r requirements.txt --target ./package
