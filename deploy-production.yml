@@ -63,7 +63,7 @@ Resources:
           - Arn
       Code: 
         S3Bucket: "fcopuerto-deploy-cloudformation"
-        S3Key: "lambdas/Production/Melget.zip"
+        S3Key: "lambdas/production/Melget.zip"
       Runtime: "python3.7"
       Timeout: 25
       TracingConfig:
