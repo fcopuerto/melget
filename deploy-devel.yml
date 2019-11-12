@@ -44,7 +44,7 @@ Resources:
           - Effect: Allow
             Action:
             - kms:Decrypt
-            Resource: arn:aws:kms:*:686550853585:key/*            
+            Resource: "arn:aws:kms:*:686550853585:key/*"           
       Path: /
       RoleName: !Join 
         - '-'
