@@ -40,6 +40,11 @@ Resources:
             - xray:GetSamplingTargets
             - xray:GetSamplingStatisticSummaries
             Resource: "*"
+          Statement:
+          - Effect: Allow
+            Action:
+            - kms:Decrypt
+            Resource: "arn:aws:kms:*:686550853585:key/*            
       Path: /
       RoleName: !Join 
         - '-'
