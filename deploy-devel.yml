@@ -19,22 +19,13 @@ Resources:
           Statement:
           - Effect: Allow
             Action:
-            - xray:PutTraceSegments
-            - xray:PutTelemetryRecords
-            - xray:GetSamplingRules
-            - xray:GetSamplingTargets
-            - xray:GetSamplingStatisticSummaries
-            Resource: *          
-          Statement:
-          - Effect: Allow
-            Action:
             - s3:GetObject
             - s3:PutObject
             Resource: arn:aws:s3:::*
           Statement:
           - Effect: Allow
             Action:
-            - logs: *
+            - logs:*
             Resource: arn:aws:logs:*:*:*
           Statement:
           - Effect: Allow
@@ -43,8 +34,17 @@ Resources:
           Statement:
           - Effect: Allow
             Action:
+            - xray:PutTraceSegments
+            - xray:PutTelemetryRecords
+            - xray:GetSamplingRules
+            - xray:GetSamplingTargets
+            - xray:GetSamplingStatisticSummaries
+            Resource: "*"
+          Statement:
+          - Effect: Allow
+            Action:
             - kms:Decrypt
-            Resource: "arn:aws:kms:*:686550853585:key/*"           
+            Resource: arn:aws:kms:*:686550853585:key/*            
       Path: /
       RoleName: !Join 
         - '-'
