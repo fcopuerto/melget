@@ -23,7 +23,6 @@ Resources:
             - s3:PutObject
             Resource: arn:aws:s3:::*
           Statement:
-          - Effect: Allow
             Action:
             - logs:*
             Resource: arn:aws:logs:*:*:*
@@ -40,6 +39,11 @@ Resources:
             - xray:GetSamplingTargets
             - xray:GetSamplingStatisticSummaries
             Resource: "*"
+          Statement:
+          - Effect: Allow
+            Action:
+            - kms:Decrypt
+            Resource: "arn:aws:kms:*:686550853585:key/*"
       Path: /
       RoleName: !Join 
         - '-'
