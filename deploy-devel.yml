@@ -25,7 +25,7 @@ Resources:
           Statement:
           - Effect: Allow
             Action:
-            - logs:*
+            - logs: *
             Resource: arn:aws:logs:*:*:*
           Statement:
           - Effect: Allow
@@ -39,7 +39,7 @@ Resources:
             - xray:GetSamplingRules
             - xray:GetSamplingTargets
             - xray:GetSamplingStatisticSummaries
-            Resource: "*"
+            Resource: *
           Statement:
           - Effect: Allow
             Action:
