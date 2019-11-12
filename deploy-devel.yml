@@ -19,6 +19,15 @@ Resources:
           Statement:
           - Effect: Allow
             Action:
+            - xray:PutTraceSegments
+            - xray:PutTelemetryRecords
+            - xray:GetSamplingRules
+            - xray:GetSamplingTargets
+            - xray:GetSamplingStatisticSummaries
+            Resource: *          
+          Statement:
+          - Effect: Allow
+            Action:
             - s3:GetObject
             - s3:PutObject
             Resource: arn:aws:s3:::*
@@ -31,15 +40,6 @@ Resources:
           - Effect: Allow
             Action: iam:ListUsers
             Resource: arn:aws:iam::*:*
-          Statement:
-          - Effect: Allow
-            Action:
-            - xray:PutTraceSegments
-            - xray:PutTelemetryRecords
-            - xray:GetSamplingRules
-            - xray:GetSamplingTargets
-            - xray:GetSamplingStatisticSummaries
-            Resource: *
           Statement:
           - Effect: Allow
             Action:
