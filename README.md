@@ -11,9 +11,14 @@ See http://library.mitsubishielectric.co.uk/pdf/search/MAC-567IF, and Mistubishi
 ### Prerequisites
 
 Our AC device, will be registered in the Melcloud plattform, in order to be used by our library.
-```
-For example the device MyLivingRoomAC which is setup in the builindg myBulding can be controlled by this API
-```
+
+For example:
+The device [MyLivingRoomAC](https://fcopuerto.github.io/docs/melget/MyLivingRoom.png) 
+- which is setup in the builindg myBulding -
+
+- can be controlled with the API -
+[MyLivingRoomAC](https://fcopuerto.github.io/docs/melget/MyLivingRoomAC_Details.png)
+
 
 ### Installing
 
@@ -21,7 +26,7 @@ This serverless library, should be deployed as a Lambda, runing Python 3.7 in AW
 Tha handler of this lambda will be lambda_function.lambda_handler and this lambda needs the login of melclooud as
 a environment vars, this code is done in order to decrypt thos parameters that should be encrypted in the lambda as with an AWS KMS key.
 
-This library was mad to bein calle from Amazon Alexa https://developer.amazon.com
+This library was mad to bein used from Amazon Alexa https://developer.amazon.com
 
 ## Running the tests
 
@@ -49,7 +54,7 @@ See deploy.yml file.
 
 ## Built With
 
-* [Python3](https://docs.python.org/release/3.7.3//) - The main code used
+* [Python3](https://docs.python.org/release/3.7.3/) - The main code used
 * [AWS Lambda](https://aws.amazon.com/es/lambda/) - The serverless infrastucture
 
 
