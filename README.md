@@ -17,7 +17,7 @@ For example the device MyLivingRoomAC which is setup in the builindg myBulding c
 
 ### Installing
 
-This API should be deployed as a Lambda, runing Python 3.7 in AWS. 
+This serverless library, should be deployed as a Lambda, runing Python 3.7 in AWS. 
 Tha handler of this lambda will be lambda_function.lambda_handler and this lambda needs the login of melclooud as
 a environment vars, this code is done in order to decrypt thos parameters that should be encrypted in the lambda as with an AWS KMS key.
 
@@ -49,9 +49,9 @@ See deploy.yml file.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Python3](https://docs.python.org/release/3.7.3//) - The main code used
+* [AWS Lambda](https://aws.amazon.com/es/lambda/) - The serverless infrastucture
+
 
 ## Contributing
 
@@ -63,13 +63,13 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Fran Puerto ** - *Initial work* - [PurpleBooth](https://github.com/fcopuerto)
+* **Fran Puerto ** - *Initial work* - (https://github.com/fcopuerto)
 
 See also the list of [contributors](https://github.com/fcopuerto/melget/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
