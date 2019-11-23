@@ -14,8 +14,8 @@ Our AC device, will be registered in the Melcloud plattform, in order to be used
 
 For example:
 The device:
-[MyLivingRoomAC](https://fcopuerto.github.io/docs/melget/MyLivingRoom.png) which is setup in the builindg myBulding, can be controlled with the API:
-[MyLivingRoomAC](https://fcopuerto.github.io/docs/melget/MyLivingRoomAC_Details.png)
+[!MyLivingRoomAC](https://fcopuerto.github.io/docs/melget/MyLivingRoom.png) which is setup in the builindg myBulding, can be controlled with the API:
+[!MyLivingRoomAC](https://fcopuerto.github.io/docs/melget/MyLivingRoomAC_Details.png)
 
 
 ### Installing
